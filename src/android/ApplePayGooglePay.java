@@ -98,7 +98,7 @@ public class ApplePayGooglePay extends CordovaPlugin {
     }
 
     private void canMakePayments(JSONArray args, CallbackContext callbackContext) throws JSONException {
-
+        System.out.println("Enter canMakePayments");
         // The call to isReadyToPay is asynchronous and returns a Task. We need to provide an
         // OnCompleteListener to be triggered when the result of the call is known.
         IsReadyToPayRequest request = IsReadyToPayRequest.newBuilder()
@@ -120,6 +120,7 @@ public class ApplePayGooglePay extends CordovaPlugin {
     }
 
     private void makePaymentRequest(JSONArray args, CallbackContext callbackContext) throws JSONException {
+        System.out.println("Enter makePaymentRequest");
         JSONObject argss = args.getJSONObject(0);
         Activity activity = cordova.getActivity();
         cordova.setActivityResultCallback(this);
@@ -150,11 +151,12 @@ public class ApplePayGooglePay extends CordovaPlugin {
             String requestJson = paymentDataRequest.toString();
 
             PaymentDataRequest request = PaymentDataRequest.fromJson(requestJson);
-
+            System.out.println("Enter request ");
             // Since loadPaymentData may show the UI asking the user to select a payment method, we use
             // AutoResolveHelper to wait for the user interacting with it. Once completed,
             // onActivityResult will be called with the result.
             if (request != null) {
+                System.out.println("Enter request 1 ");
                 AutoResolveHelper.resolveTask(paymentsClient.loadPaymentData(request), activity, LOAD_PAYMENT_DATA_REQUEST_CODE);
             }
 
